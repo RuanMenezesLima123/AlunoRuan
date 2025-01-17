@@ -1,35 +1,62 @@
-const mesasContainer = document.getElementById('mesas-container');
+document.addEventListener("DOMContentLoaded", () => {
+  const mesas = [
+    { id: 1, estado: "disponivel", cadeiras: 4, local: "Próximo à janela" },
+    { id: 2, estado: "reservada", cadeiras: 2, local: "Perto da entrada" },
+    { id: 3, estado: "em-uso", cadeiras: 6, local: "Centro do salão" },
+    { id: 4, estado: "disponivel", cadeiras: 4, local: "Perto da cozinha" },
+  ];
 
-const mesas = [
-  { id: 1, status: 'livre' },
-  { id: 2, status: 'ocupada' },
-  { id: 3, status: 'reservada' },
-  { id: 4, status: 'livre' },
-  { id: 5, status: 'ocupada' },
-  { id: 6, status: 'reservada' },
-  { id: 7, status: 'livre' },
-  { id: 8, status: 'ocupada' }
-];
+  const mapa = document.querySelector(".mapa");
+  const detalhes = document.getElementById("mesa-detalhes");
+  const alterarEstadoBtn = document.getElementById("alterar-estado");
+  let mesaSelecionada = null;
 
-function renderMesas() {
-  mesas.forEach(mesa => {
-    const mesaDiv = document.createElement('div');
-    mesaDiv.classList.add('mesa', mesa.status);
-    mesaDiv.textContent = `Mesa ${mesa.id}`;
-    mesaDiv.addEventListener('click', () => mudarStatus(mesa.id));
-    mesasContainer.appendChild(mesaDiv);
+  mesas.forEach((mesa) => {
+    const mesaDiv = document.createElement("div");
+    mesaDiv.className = `mesa ${mesa.estado}`;
+    mesaDiv.setAttribute("role", "button");
+    mesaDiv.setAttribute("aria-label", `Mesa ${mesa.id}, ${mesa.estado}`);
+    mesaDiv.innerHTML = `
+      <p><strong>Mesa ${mesa.id}</strong></p>
+      <p>${mesa.cadeiras} cadeiras</p>
+    `;
+    mesaDiv.addEventListener("click", () => exibirDetalhes(mesa));
+    mapa.appendChild(mesaDiv);
   });
-}
 
+  function exibirDetalhes(mesa) {
+    mesaSelecionada = mesa;
+    detalhes.innerHTML = `
+      <p><strong>Mesa ${mesa.id}</strong></p>
+      <p>Estado: ${mesa.estado}</p>
+      <p>Cadeiras: ${mesa.cadeiras}</p>
+      <p>Localização: ${mesa.local}</p>
+    `;
+    alterarEstadoBtn.hidden = false;
+  }
 
-function mudarStatus(id) {
-  const mesa = mesas.find(m => m.id === id);
-  if (mesa.status === 'livre') mesa.status = 'ocupada';
-  else if (mesa.status === 'ocupada') mesa.status = 'reservada';
-  else mesa.status = 'livre';
+  alterarEstadoBtn.addEventListener("click", () => {
+    if (!mesaSelecionada) return;
+    const estados = ["disponivel", "reservada", "em-uso"];
+    const indexAtual = estados.indexOf(mesaSelecionada.estado);
+    mesaSelecionada.estado = estados[(indexAtual + 1) % estados.length];
 
-  mesasContainer.innerHTML = '';
-  renderMesas();
-}
+    mapa.innerHTML = "";
+    detalhes.innerHTML = "<p>Selecione uma mesa para ver os detalhes.</p>";
+    alterarEstadoBtn.hidden = true;
+    mesaSelecionada = null;
 
-renderMesas();
+    mesas.forEach((mesa) => {
+      const mesaDiv = document.createElement("div");
+      mesaDiv.className = `mesa ${mesa.estado}`;
+      mesaDiv.setAttribute("role", "button");
+      mesaDiv.setAttribute("aria-label", `Mesa ${mesa.id}, ${mesa.estado}`);
+      mesaDiv.innerHTML = `
+        <p><strong>Mesa ${mesa.id}</strong></p>
+        <p>${mesa.cadeiras} cadeiras</p>
+      `;
+      mesaDiv.addEventListener("click", () => exibirDetalhes(mesa));
+      mapa.appendChild(mesaDiv);
+    });
+  });
+});
