@@ -1,0 +1,37 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+#mesas-container {
+  display: grid;
+  grid-template-columns: repeat(4, 100px);
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.mesa {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+}
+
+.mesa.livre {
+  background-color: green;
+}
+
+.mesa.ocupada {
+  background-color: red;
+}
+
+.mesa.reservada {
+  background-color: yellow;
+  color: black;
+}
