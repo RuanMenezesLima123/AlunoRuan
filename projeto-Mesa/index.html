@@ -1,15 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Disponibilidade de Mesas</title>
-  <link rel="stylesheet" href="styles/style.css">
+  <title>Gerenciamento de Mesas</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>Disponibilidade de Mesas</h1>
-  <div id="mesas-container">
-  </div>
-  <script src="scripts/script.js"></script>
+  <header>
+    <h1>Restaurante - Gerenciamento de Mesas</h1>
+  </header>
+  <main>
+    <section class="mapa" aria-label="Mapa das mesas do restaurante">
+      <!-- Mesas renderizadas dinamicamente -->
+    </section>
+    <section class="detalhes" aria-label="Detalhes da mesa selecionada">
+      <h2>Detalhes da Mesa</h2>
+      <div id="mesa-detalhes">
+        <p>Selecione uma mesa para ver os detalhes.</p>
+      </div>
+      <button id="alterar-estado" hidden>Alterar Estado</button>
+    </section>
+  </main>
+  <footer>
+    <p>© 2025 Restaurante</p>
+  </footer>
+  <script src="script.js"></script>
 </body>
 </html>
