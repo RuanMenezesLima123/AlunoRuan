@@ -1,0 +1,38 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#local {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 300px;
+}
+
+.o {
+  background-color: red;
+  height: 100px;
+  width: 100px;
+  border: 2px solid black;
+  border-radius: 100%;
+}
+
+.l {
+  background-color: blue;
+  height: 100px;
+  width: 100px;
+  border: 2px solid black;
+  border-radius: 100%;
+}
+
+.r {
+  background-color: yellow;
+  height: 100px;
+  width: 100px;
+  border: 2px solid black;
+  border-radius: 100%;
+}
