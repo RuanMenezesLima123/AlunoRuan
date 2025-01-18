@@ -1,23 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Disponibilidade de Mesas</title>
+  <title>Gerenciamento de Mesas</title>
   <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
-  <h1>Disponibilidade de Mesas</h1>
-  <div id="local">
-    <div class="o" ></div>
-    <div class="l" ></div>
-    <div class="o" ></div>
-    <div class="r" ></div>
-    <div class="r" ></div>
-    <div class="o" ></div>
-    <div class="l" ></div>
-    <div class="r" ></div>
-  </div>
-  <script src="scripts/script.js"></script>
+  <header>
+    <h1>Restaurante - Gerenciamento de Mesas</h1>
+  </header>
+  <main>
+    <section class="mapa" aria-label="Mapa das mesas do restaurante">
+      <div class="mesa disponivel">
+        <p><strong>Mesa 1</strong></p>
+        <p>4 cadeiras</p>
+        <p>Próximo à janela</p>
+      </div>
+
+      <div class="mesa reservada">
+        <p><strong>Mesa 2</strong></p>
+        <p>2 cadeiras</p>
+        <p>Perto da entrada</p>
+      </div>
+
+      <div class="mesa em-uso">
+        <p><strong>Mesa 3</strong></p>
+        <p>6 cadeiras</p>
+        <p>Centro do salão</p>
+      </div>
+
+      <div class="mesa disponivel">
+        <p><strong>Mesa 4</strong></p>
+        <p>4 cadeiras</p>
+        <p>Perto da cozinha</p>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <p>© 2025 Restaurante</p>
+  </footer>
 </body>
 </html>
