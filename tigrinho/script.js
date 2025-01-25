@@ -27,22 +27,34 @@ function gerarQuadrados() {
     var main = document.getElementById("main");
 
     cont = 0;
+    
+    main.innerHTML = "";
 
-    for(let i = 1; i <= input; i++) {
+    for (let i = 1; i <= input; i++) {
         var quadrados = document.createElement("div");
 
         quadrados.setAttribute("class", "quadrados");
-        quadrados.setAttribute("id", "" + (i));
+        quadrados.setAttribute("id", "bx" + i);
 
         quadrados.addEventListener("click", AlterarQuadrado);
 
         quadrados.innerHTML = i;
 
         main.appendChild(quadrados);
-
     }
 
-    bxS = Math.floor(Math.random() * input);
+    bxS = Math.floor(Math.random() * input) + 1;
+
+    //fiz pra ser de acordo com a quantidade
+    if (input > 0 && input <= 10)  {
+        setTimeout(function () {
+            for (let i = 1; i <= input; i++) {
+                var elemento = document.getElementById("bx" + i);
+                if (elemento) elemento.remove();
+                //esse if nao precisava mas achei legal implementar ele. Ele testa se o elemento existe ai se sim ele o apaga
+            }
+        }, 3000); //tempo em milesimos
+    }
 }
 
 function AlterarQuadrado() {
@@ -53,12 +65,11 @@ function AlterarQuadrado() {
 
     var guardaID = this.getAttribute("id");
 
-    if(guardaID == bxS) {
+    if (guardaID == "bx" + bxS) {
         alert("ACERTOU PAPAI");
     } else {
         cont++;
     }
-    
-    span.innerHTML = cont;
 
+    span.innerHTML = cont;
 }
