@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login</title>
+  <style>
+    body { font-family: sans-serif; display: flex; flex-direction: column; align-items: center; padding-top: 50px; }
+    form { display: flex; flex-direction: column; width: 300px; }
+    input { margin-bottom: 10px; padding: 8px; font-size: 16px; }
+    button { padding: 10px; font-size: 16px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h2>Login</h2>
+  <form id="loginForm">
+    <input type="email" id="email" placeholder="Email" required />
+    <input type="password" id="senha" placeholder="Senha" required />
+    <button type="submit">Entrar</button>
+  </form>
+  <p id="resposta"></p>
+
+ <script>
+    const form = document.getElementById('loginForm');
+    const resposta = document.getElementById('resposta');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const senha = document.getElementById('senha').value;
+
+      const res = await fetch('http://localhost:3000/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, senha })
+      });
+
+      const data = await res.json();
+      resposta.textContent = data.mensagem || data.erro;
+    });
+  </script>
+
+  <a href="cadastro.html">Tenho nem cadastro</a>
+
+</body>
+</html>

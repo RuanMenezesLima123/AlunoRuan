@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Cadastro</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    input {
+      display: block;
+      width: 100%;
+      margin: 10px 0;
+      padding: 10px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 10px;
+      background: #007bff;
+      color: white;
+      border: none;
+      width: 100%;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #resposta {
+      margin-top: 15px;
+      color: green;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Cadastro de Usuário</h2>
+    <form id="cadastroForm">
+      <input type="email" id="email" placeholder="Digite seu email" required>
+      <input type="password" id="senha" placeholder="Digite sua senha" required>
+      <button type="submit">Cadastrar</button>
+    </form>
+    <div id="resposta"></div>
+  </div>
+
+  <script>
+    const form = document.getElementById('cadastroForm');
+    const resposta = document.getElementById('resposta');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const senha = document.getElementById('senha').value;
+
+      try {
+        const res = await fetch('http://localhost:3000/cadastro', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, senha })
+        });
+
+        const data = await res.json();
+        resposta.textContent = data.mensagem || data.erro;
+        resposta.style.color = data.mensagem ? 'green' : 'red';
+      } catch (err) {
+        resposta.textContent = 'Erro ao conectar com o servidor';
+        resposta.style.color = 'red';
+      }
+    });
+  </script>
+
+  <a href="index.html">Ja tenho login lesado</a>
+
+</body>
+</html>
